@@ -1,0 +1,53 @@
+{
+    "save_workspace": "never",
+    "always_save_history": false,
+    "reuse_sessions_for_project_links": true,
+    "posix_terminal_shell": "bash",
+    "load_workspace": false,
+    "initial_working_directory": "~",
+    "auto_detect_indentation": true,
+    "focus_console_after_exec": true,
+    "highlight_selected_line": true,
+    "highlight_r_function_calls": true,
+    "default_encoding": "UTF-8",
+    "panes": {
+        "quadrants": [
+            "Source",
+            "TabSet1",
+            "Console",
+            "TabSet2"
+        ],
+        "tabSet1": [
+            "Environment",
+            "History",
+            "Build",
+            "VCS",
+            "Tutorial",
+            "Presentation"
+        ],
+        "tabSet2": [
+            "Files",
+            "Plots",
+            "Packages",
+            "Help",
+            "Viewer",
+            "Presentations"
+        ],
+        "hiddenTabSet": [
+            "Connections"
+        ],
+        "console_left_on_top": false,
+        "console_right_on_top": true,
+        "additional_source_columns": 0
+    },
+    "windows_terminal_shell": "win-cmd",
+    "jobs_tab_visibility": "shown",
+    "pdf_previewer": "rstudio",
+    "default_project_location": "~",
+    "source_with_echo": true,
+    "rmd_auto_date": true,
+    "document_author": "Yosuke Abe",
+    "default_latex_program": "XeLaTeX",
+    "use_tinytex": true,
+    "insert_native_pipe_operator": true
+}
