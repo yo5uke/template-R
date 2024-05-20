@@ -1,4 +1,4 @@
-FROM rocker/rstudio:latest
+FROM rocker/rstudio:4.4.0
 
 RUN apt-get update && apt-get install -y \
     fonts-ipaexfont \
@@ -29,7 +29,7 @@ RUN R -e "install.packages(c('renv', 'jsonlite', 'languageserver'))"
 
 # Julia
 ENV JULIA_MINOR_VERSION=1.10
-ENV JULIA_PATCH_VERSION=0
+ENV JULIA_PATCH_VERSION=3
 
 RUN wget https://julialang-s3.julialang.org/bin/linux/x64/${JULIA_MINOR_VERSION}/julia-${JULIA_MINOR_VERSION}.${JULIA_PATCH_VERSION}-linux-x86_64.tar.gz && \
     tar xvf julia-${JULIA_MINOR_VERSION}.${JULIA_PATCH_VERSION}-linux-x86_64.tar.gz && \
@@ -41,7 +41,7 @@ ENV PATH $PATH:~/.pip/bin
 
 RUN pip install ipykernel jupyter
 
-RUN wget -O quarto.deb "https://github.com/quarto-dev/quarto-cli/releases/download/v1.4.553/quarto-1.4.553-linux-amd64.deb" && \
+RUN wget -O quarto.deb "https://github.com/quarto-dev/quarto-cli/releases/download/v1.4.554/quarto-1.4.554-linux-amd64.deb" && \
     dpkg -i quarto.deb && \
     rm quarto.deb
 
