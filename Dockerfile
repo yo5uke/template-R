@@ -25,7 +25,7 @@ COPY --chown=rstudio:rstudio /.rstudio/rstudio-prefs.json /home/rstudio/.config/
 COPY --chown=rstudio:rstudio /.vscode/_settings.json /home/rstudio/.vscode-server/data/Machine/settings.json
 
 # R Package
-RUN R -e "install.packages(c('renv', 'jsonlite', 'languageserver'))"
+RUN R -e "install.packages(c('renv', 'tinytex', 'jsonlite', 'languageserver'))"
 
 # Julia
 ENV JULIA_MINOR_VERSION=1.10
