@@ -1,8 +1,6 @@
 FROM rocker/rstudio:4.4.0
 
 RUN apt-get update && apt-get install -y \
-    fonts-ipaexfont \
-    fonts-noto-cjk \
     libmagick++-dev \
     tk \
     locales \
@@ -12,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# ロケールとタイムゾーンの設定
+# locale & timezone
 ENV LANG ja_JP.UTF-8
 ENV LC_ALL ja_JP.UTF-8
 RUN sed -i '$d' /etc/locale.gen \
@@ -25,7 +23,7 @@ COPY --chown=rstudio:rstudio /.rstudio/rstudio-prefs.json /home/rstudio/.config/
 COPY --chown=rstudio:rstudio /.vscode/_settings.json /home/rstudio/.vscode-server/data/Machine/settings.json
 
 # R Package
-RUN R -e "install.packages(c('renv', 'tinytex', 'jsonlite', 'languageserver'))"
+RUN R -e "install.packages('renv')"
 
 # Julia
 ENV JULIA_MINOR_VERSION=1.10
@@ -39,9 +37,10 @@ RUN wget https://julialang-s3.julialang.org/bin/linux/x64/${JULIA_MINOR_VERSION}
 # DVC Path
 ENV PATH $PATH:~/.pip/bin
 
-RUN pip install ipykernel jupyter
+# Quarto
+ENV QUARTO_VERSION=1.4.554
 
-RUN wget -O quarto.deb "https://github.com/quarto-dev/quarto-cli/releases/download/v1.4.554/quarto-1.4.554-linux-amd64.deb" && \
+RUN wget -O quarto.deb "https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.deb" && \
     dpkg -i quarto.deb && \
     rm quarto.deb
 
