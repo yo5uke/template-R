@@ -1,6 +1,6 @@
-FROM rocker/rstudio:4.4.0
+FROM rocker/rstudio:4.4.1
 
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
     libmagick++-dev \
     tk \
     locales \
@@ -39,9 +39,9 @@ ENV PATH $PATH:~/.cache/pip/bin
 
 # Quarto
 ENV QUARTO_MINOR_VERSION=1.5
-ENV QUARTO_PATCH_VERSION=43
+ENV QUARTO_PATCH_VERSION=45
 
-RUN wget -O quarto.deb "https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_MINOR_VERSION}.${QUARTO_PATCH_VERSION}/quarto-${QUARTO_MINOR_VERSION}.${QUARTO_PATCH_VERSION}-linux-amd64.deb" && \
+RUN wget -O quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_MINOR_VERSION}.${QUARTO_PATCH_VERSION}/quarto-${QUARTO_MINOR_VERSION}.${QUARTO_PATCH_VERSION}-linux-amd64.deb && \
     dpkg -i quarto.deb && \
     rm quarto.deb
 
