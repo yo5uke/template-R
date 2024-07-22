@@ -40,13 +40,11 @@
         "console_right_on_top": true,
         "additional_source_columns": 0
     },
-    "windows_terminal_shell": "win-cmd",
     "jobs_tab_visibility": "shown",
     "pdf_previewer": "rstudio",
     "default_project_location": "~",
     "source_with_echo": true,
     "rmd_auto_date": true,
-    "document_author": "Yosuke Abe",
     "default_latex_program": "XeLaTeX",
     "use_tinytex": true,
     "insert_native_pipe_operator": true
