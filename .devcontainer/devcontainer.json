@@ -10,9 +10,7 @@
         "julialang.language-julia",
         "janisdd.vscode-edit-csv",
         "James-Yu.latex-workshop",
-        "GitHub.copilot",
-        "ms-python.python",
-        "ms-toolsai.jupyter"
+        "GitHub.copilot"
 	],
 	"forwardPorts": [8080, 8787],
     "workspaceFolder": "/home/rstudio/work",
