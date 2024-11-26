@@ -19,3 +19,14 @@
 1. docker-compose.ymlの日本語設定を削除
     - environmentの`LANG`, `LANGUAGE`, `LC_ALL`部分
 1. コンテナのリビルド
+
+## RStudio内でGitHub Copilotを使用したい場合
+
+.config/.rstudio/rstudio-prefs.jsonファイルに下の2行を追記します。
+
+```
+    "copilot_enabled": true,
+    "copilot_indexing_enabled": true
+```
+
+追記、保存したうえでコンテナをリビルドすれば、RStudio内でGitHub Copilotが使用できるようになります（設定からサインインする必要あり）。
