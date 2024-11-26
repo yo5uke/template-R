@@ -6,7 +6,6 @@
     "extensions": [
 	    "REditorSupport.r",
         "quarto.quarto",
-        "znck.grammarly",
         "julialang.language-julia",
         "janisdd.vscode-edit-csv",
         "James-Yu.latex-workshop",
