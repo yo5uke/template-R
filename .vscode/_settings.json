@@ -219,5 +219,6 @@
             "env": {}
         }
     ],
-    "r.lsp.promptToInstall": false
+    "r.lsp.promptToInstall": false,
+    "python.defaultInterpreterPath": "/home/rstudio/.venv/bin/python"
 }

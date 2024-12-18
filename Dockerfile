@@ -1,4 +1,4 @@
-FROM rocker/rstudio:4.4.1
+FROM rocker/rstudio:4.4.2
 
 RUN apt update && apt install -y \
     libmagick++-dev \
@@ -7,6 +7,7 @@ RUN apt update && apt install -y \
     openssh-client \
     libxt-dev \
     python3 \
+    python3-venv \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
@@ -26,9 +27,14 @@ COPY --chown=rstudio:rstudio /.vscode/_settings.json /home/rstudio/.vscode-serve
 # R Package
 RUN R -e "install.packages(c('renv'))"
 
+# Python
+RUN python3 -m venv /home/rstudio/.venv && \
+    /home/rstudio/.venv/bin/pip install --upgrade pip && \
+    /home/rstudio/.venv/bin/pip install jupyter dvc dvc-gdrive
+
 # Julia
 ENV JULIA_MINOR_VERSION=1.11
-ENV JULIA_PATCH_VERSION=1
+ENV JULIA_PATCH_VERSION=2
 
 RUN wget https://julialang-s3.julialang.org/bin/linux/x64/${JULIA_MINOR_VERSION}/julia-${JULIA_MINOR_VERSION}.${JULIA_PATCH_VERSION}-linux-x86_64.tar.gz && \
     tar xvf julia-${JULIA_MINOR_VERSION}.${JULIA_PATCH_VERSION}-linux-x86_64.tar.gz && \
@@ -40,7 +46,7 @@ ENV PATH $PATH:~/.cache/pip/bin
 
 # Quarto
 ENV QUARTO_MINOR_VERSION=1.6
-ENV QUARTO_PATCH_VERSION=37
+ENV QUARTO_PATCH_VERSION=39
 
 RUN wget -O quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_MINOR_VERSION}.${QUARTO_PATCH_VERSION}/quarto-${QUARTO_MINOR_VERSION}.${QUARTO_PATCH_VERSION}-linux-amd64.deb && \
     dpkg -i quarto.deb && \

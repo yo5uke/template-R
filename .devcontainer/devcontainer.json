@@ -6,6 +6,8 @@
     "extensions": [
 	    "REditorSupport.r",
         "quarto.quarto",
+        "ms-python.python",
+        "ms-toolsai.jupyter",
         "julialang.language-julia",
         "janisdd.vscode-edit-csv",
         "James-Yu.latex-workshop",

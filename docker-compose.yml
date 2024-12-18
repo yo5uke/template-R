@@ -8,17 +8,19 @@ services:
             - LC_ALL=ja_JP.UTF-8
             - TZ=Asia/Tokyo
             - DISABLE_AUTH=true
-            - PYTHONUSERBASE=/home/rstudio/.cache/pip
             - JULIA_DEPOT_PATH=/home/rstudio/.cache/julia
         volumes:
             - .:/home/rstudio/work
             - cache:/home/rstudio/.cache
             - TinyTeX:/home/rstudio/.TinyTeX
             - fonts:/usr/share/fonts
+            - venv:/home/rstudio/.venv
 volumes:
   cache:
     external: true
   TinyTeX:
     external: true
   fonts:
+    external: true
+  venv:
     external: true
