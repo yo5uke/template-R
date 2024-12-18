@@ -3,7 +3,6 @@ FROM rocker/rstudio:4.4.2
 RUN apt update && apt install -y \
     libmagick++-dev \
     tk \
-    locales \
     openssh-client \
     libxt-dev \
     python3 \
@@ -11,13 +10,7 @@ RUN apt update && apt install -y \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# locale & timezone
-ENV LANG ja_JP.UTF-8
-ENV LC_ALL ja_JP.UTF-8
-RUN sed -i '$d' /etc/locale.gen \
-    && echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen \
-    && locale-gen ja_JP.UTF-8 \
-    && /usr/sbin/update-locale LANG=ja_JP.UTF-8 LANGUAGE="ja_JP:ja"
+# timezone
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 COPY --chown=rstudio:rstudio .config/.rstudio/rstudio-prefs.json /home/rstudio/.config/rstudio/rstudio-prefs.json
@@ -32,6 +25,9 @@ RUN python3 -m venv /home/rstudio/.venv && \
     /home/rstudio/.venv/bin/pip install --upgrade pip && \
     /home/rstudio/.venv/bin/pip install jupyter dvc dvc-gdrive
 
+# PATH
+ENV PATH="/home/rstudio/.venv/bin:$PATH"
+
 # Julia
 ENV JULIA_MINOR_VERSION=1.11
 ENV JULIA_PATCH_VERSION=2
@@ -40,9 +36,6 @@ RUN wget https://julialang-s3.julialang.org/bin/linux/x64/${JULIA_MINOR_VERSION}
     tar xvf julia-${JULIA_MINOR_VERSION}.${JULIA_PATCH_VERSION}-linux-x86_64.tar.gz && \
     rm julia-${JULIA_MINOR_VERSION}.${JULIA_PATCH_VERSION}-linux-x86_64.tar.gz && \
     ln -s $(pwd)/julia-$JULIA_MINOR_VERSION.$JULIA_PATCH_VERSION/bin/julia /usr/bin/julia
-
-# DVC Path
-ENV PATH $PATH:~/.cache/pip/bin
 
 # Quarto
 ENV QUARTO_MINOR_VERSION=1.6
