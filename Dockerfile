@@ -1,4 +1,4 @@
-FROM rocker/rstudio:4.4.2
+FROM rocker/rstudio:4.4.1
 
 RUN apt update && apt install -y \
     libmagick++-dev \
@@ -6,7 +6,6 @@ RUN apt update && apt install -y \
     openssh-client \
     libxt-dev \
     python3 \
-    python3-venv \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
@@ -19,14 +18,6 @@ COPY --chown=rstudio:rstudio /.vscode/_settings.json /home/rstudio/.vscode-serve
 
 # R Package
 RUN R -e "install.packages(c('renv'))"
-
-# Python
-RUN python3 -m venv /home/rstudio/.venv && \
-    /home/rstudio/.venv/bin/pip install --upgrade pip && \
-    /home/rstudio/.venv/bin/pip install jupyter dvc dvc-gdrive
-
-# PATH
-ENV PATH="/home/rstudio/.venv/bin:$PATH"
 
 # Julia
 ENV JULIA_MINOR_VERSION=1.11
